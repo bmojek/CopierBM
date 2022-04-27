@@ -24,6 +24,14 @@ namespace Zadanie2
             }
         }
 
+        public void ScanFaxPrint(IDocument document, string email)
+        {
+            var formatType = document.GetFormatType();
+            Scan(out document, formatType);
+            Fax(document, email);
+            Print(document);
+        }
+
         public IDevice.State GetState()
         {
             if (device1 is IDevice.State.on)

@@ -9,7 +9,8 @@ namespace Zadanie2
             var xerox = new MultifunctionalDevice();
             xerox.PowerOn();
             IDocument doc1 = new PDFDocument("aaa.pdf");
-            xerox.Fax(doc1, "bartek@gmail.com");
+            xerox.ScanFaxPrint(doc1, "bartek@gmail.com");
+            xerox.Fax(doc1, "example@gmail.com");
         }
     }
 }
