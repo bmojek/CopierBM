@@ -49,11 +49,11 @@ namespace Zadanie2
             if (device1 is IDevice.State.on) ScanCounter++;
 
             if (formatType is IDocument.FormatType.TXT)
-                document = new TextDocument($"TextScan{Counter}.txt");
+                document = new TextDocument($"TextScan{ScanCounter}.txt");
             else if (formatType is IDocument.FormatType.JPG)
-                document = new TextDocument($"ImageScan{Counter}.jpg");
+                document = new TextDocument($"ImageScan{ScanCounter}.jpg");
             else
-                document = new TextDocument($"PDFScan{Counter}.pdf");
+                document = new TextDocument($"PDFScan{ScanCounter}.pdf");
 
             if (device1 is IDevice.State.on)
             {

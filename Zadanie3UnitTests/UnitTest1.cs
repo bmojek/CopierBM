@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 
-namespace Zadanie2
+namespace Zadanie3
 {
     [TestClass]
     public class UnitTest1
@@ -32,9 +32,9 @@ namespace Zadanie2
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_FaxCounter()
+        public void MultidimensionalDevice_FaxCounter()
         {
-            var fax1 = new MultifunctionalDevice();
+            var fax1 = new MultidimensionalDevice();
             fax1.PowerOn();
 
             IDocument doc1 = new PDFDocument("test.pdf");
@@ -53,7 +53,7 @@ namespace Zadanie2
         [TestMethod]
         public void Fax_FormatTypeDocument()
         {
-            var fax1 = new MultifunctionalDevice();
+            var fax1 = new MultidimensionalDevice();
             fax1.PowerOn();
 
             var currentConsoleOut = Console.Out;

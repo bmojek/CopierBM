@@ -41,8 +41,7 @@ namespace Zadanie1
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
-                IDocument doc1;
-                copier.Scan(out doc1, formatType: IDocument.FormatType.JPG);
+                copier.Scan(out IDocument doc1, formatType: IDocument.FormatType.JPG);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Scan"));
                 Assert.IsTrue(consoleOutput.GetOutput().Contains(".jpg"));
 

@@ -4,15 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zadanie1
+namespace Zadanie3
 {
-    public class Copier : IPrinter, IScanner
+    public class MultidimensionalDevice : IPrinter, IScanner, IFax
     {
         private IDevice.State device1 = IDevice.State.off;
         private IDocument document1;
         public int Counter { get; private set; } = 0;
         public int PrintCounter { get; private set; } = 0;
         public int ScanCounter { get; private set; } = 0;
+        public int FaxCounter { get; private set; } = 0;
+        private readonly Printer p = new();
+        private readonly Scanner s = new();
+        private readonly Faxx f = new();
 
         public IDevice.State GetState()
         {
@@ -36,28 +40,18 @@ namespace Zadanie1
 
         public void Print(in IDocument document)
         {
-            if (device1 is IDevice.State.on)
-            {
-                Console.WriteLine($"{ DateTime.Now} Print: {document.GetFileName()}");
-                PrintCounter++;
-                document1 = document;
-            }
+            p.PowerOn();
+            p.Print(document);
+            p.PowerOff();
+            if (device1 is IDevice.State.on) PrintCounter++;
         }
 
         public void Scan(out IDocument document, IDocument.FormatType formatType = IDocument.FormatType.JPG)
         {
+            s.PowerOn();
+            s.Scan(out document, formatType);
+            s.PowerOff();
             if (device1 is IDevice.State.on) ScanCounter++;
-            if (formatType is IDocument.FormatType.TXT)
-                document = new TextDocument($"TextScan{ScanCounter}.txt");
-            else if (formatType is IDocument.FormatType.JPG)
-                document = new TextDocument($"ImageScan{ScanCounter}.jpg");
-            else
-                document = new TextDocument($"PDFScan{ScanCounter}.pdf");
-
-            if (device1 is IDevice.State.on)
-            {
-                Console.WriteLine($"{DateTime.Now} Scan: {document.GetFileName()}");
-            }
         }
 
         public void ScanAndPrint()
@@ -67,6 +61,14 @@ namespace Zadanie1
                 Scan(out document1, IDocument.FormatType.JPG);
                 Print(document1);
             }
+        }
+
+        public void Fax(in IDocument document, string email)
+        {
+            f.PowerOn();
+            f.Fax(document, email);
+            f.PowerOff();
+            if (device1 is IDevice.State.on) FaxCounter++;
         }
     }
 }
